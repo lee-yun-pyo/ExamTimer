@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "frontend",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
@@ -20,6 +21,11 @@
     "@types/jest": "^29.5.11",
     "@types/react": "^18.2.48",
     "@types/react-test-renderer": "^18.0.7",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "typescript": "^5.3.3"
   },
   "private": true
