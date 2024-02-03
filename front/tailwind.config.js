@@ -12,6 +12,9 @@ export default {
 
         "text-default": "#000000",
         "text-dark": "#FFFFFF",
+
+        "border-default": "#cbd5e1",
+        "border-dark": "#475569",
       },
       fontSize: {
         sm: "0.8rem",
