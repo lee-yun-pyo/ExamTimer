@@ -2,16 +2,16 @@ import { NavItem } from "./NavItem";
 
 // 하단 네비게이션 아이템 정보
 const SELECTIONS = [
-  { title: "시험 타이머", icon: "ExamTimer", path: "/" },
+  { title: "시험 타이머", icon: "ExamTimer", path: "" },
   {
     title: "1시간 집중",
     icon: "HourClock",
-    path: "/1hour",
+    path: "1hour",
   },
   {
     title: "캘린더",
     icon: "Calendar",
-    path: "/calendar",
+    path: "calendar",
   },
 ];
 
