@@ -6,15 +6,22 @@ interface Props {
   title: string;
   iconName: string;
   path: string;
+  isActive: boolean;
 }
 
-export function NavItem({ title, iconName, path }: Props) {
+export function NavItem({ title, iconName, path, isActive }: Props) {
   return (
     <li>
       <Link to={path}>
         <div className="flex flex-col items-center gap-1">
-          <NavIcons iconName={iconName} />
-          <span className="text-base text-text-default dark:text-text-dark">
+          <NavIcons iconName={iconName} isActive={isActive} />
+          <span
+            className={`text-base  ${
+              isActive
+                ? "text-my-color font-semibold"
+                : "text-text-default dark:text-text-dark"
+            } `}
+          >
             {title}
           </span>
         </div>
