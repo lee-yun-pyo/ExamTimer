@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { Layout } from "@/components/common/layout";
+import { Layout } from "@/components/common/Layout";
+import { Title } from "@/components/common/Title";
 
 export const router = createBrowserRouter([
   {
@@ -9,15 +10,15 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <div>시험 타이머</div>,
+        element: <Title />,
       },
       {
         path: "1hour",
-        element: <div>1시간 집중</div>,
+        element: <Title />,
       },
       {
         path: "calendar",
-        element: <div>calendar</div>,
+        element: <Title />,
       },
     ],
   },
