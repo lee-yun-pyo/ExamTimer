@@ -17,17 +17,17 @@ export function NavIcons({ iconName, isActive }: Props) {
   switch (iconName) {
     case "HourClock":
       iconToRender = (
-        <HourClockIcon size={24} isDarkMode={isDarkMode} isActive={isActive} />
+        <HourClockIcon size={20} isDarkMode={isDarkMode} isActive={isActive} />
       );
       break;
     case "ExamTimer":
       iconToRender = (
-        <ExamTimerIcon size={24} isDarkMode={isDarkMode} isActive={isActive} />
+        <ExamTimerIcon size={20} isDarkMode={isDarkMode} isActive={isActive} />
       );
       break;
     case "Calendar":
       iconToRender = (
-        <CalendarIcon size={24} isDarkMode={isDarkMode} isActive={isActive} />
+        <CalendarIcon size={20} isDarkMode={isDarkMode} isActive={isActive} />
       );
       break;
     default:
