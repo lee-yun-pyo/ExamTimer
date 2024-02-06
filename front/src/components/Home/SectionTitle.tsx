@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 import { EditIcon } from "@/components/Icons/EditIcon";
 
 interface Props {
@@ -8,16 +10,16 @@ interface Props {
 export function SectionTitle({ title, hasButton }: Props) {
   const handleClick = () => {};
   return (
-    <div className="flex justify-between items-center w-full">
-      <div>
-        <h2 className="font-semibold text-[20px] text-text-default dark:text-text-dark">
+    <div className="flex justify-between items-center w-full py-2">
+      <Fragment>
+        <h2 className="font-semibold text-lg text-text-default dark:text-text-dark">
           {title}
         </h2>
-      </div>
+      </Fragment>
       <div>
         {hasButton && (
-          <button className="rounded-md p-2 bg-my-color" onClick={handleClick}>
-            <EditIcon size={16} />
+          <button className="rounded-md p-1" onClick={handleClick}>
+            <EditIcon size={18} />
           </button>
         )}
       </div>
