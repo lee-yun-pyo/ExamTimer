@@ -15,6 +15,9 @@ export default {
 
         "border-default": "#cbd5e1",
         "border-dark": "#475569",
+
+        "subBtn-default": "#E9F4FE",
+        "subBtn-dark": "#2C2C37",
       },
       fontSize: {
         sm: "0.8rem",
