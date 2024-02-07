@@ -1,8 +1,11 @@
 import { ModalButon } from "@/components/Home/Modal/ModalButton";
 import { ModalExamButton } from "@/components/Home/Modal/ModalExamButton";
 
+import { RecommendExamNameType } from "@/types";
+import { RECOMMEND_EXAM_TIME } from "@/constants";
+
 interface Props {
-  examName: string;
+  examName: RecommendExamNameType;
   onClick: () => void;
 }
 
@@ -16,12 +19,15 @@ export function Modal({ examName, onClick }: Props) {
             {examName}
           </span>
         </div>
-        <div className="flex flex-col gap-2 w-full h-[250px] overflow-scroll">
-          <ModalExamButton
-            title="국어"
-            time="0840-1000"
-            onClick={() => console.log(3)}
-          />
+        <div className="flex flex-col gap-3 w-full h-[250px] overflow-scroll">
+          {RECOMMEND_EXAM_TIME[examName].map((exam) => (
+            <ModalExamButton
+              key={exam.title}
+              title={exam.title}
+              time={exam.time}
+              onClick={() => {}}
+            />
+          ))}
         </div>
         <div className="flex gap-2">
           <ModalButon title="닫기" isMain={false} onClick={() => {}} isActive />

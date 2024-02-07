@@ -6,11 +6,14 @@ import { TestButton } from "@/components/Home/TestButton";
 import { Title } from "@/components/common/Title";
 import { Modal } from "@/components/common/Modal";
 
+import { RecommendExamNameType } from "@/types";
+import { RECOMMEND_EXAM_TIME } from "@/constants";
+
 export function Exam() {
   const [showModal, setShowModal] = useState(false);
-  const [exam, setExam] = useState("");
+  const [exam, setExam] = useState<RecommendExamNameType>("수능");
 
-  const handleExamButtonClick = (examName: string) => {
+  const handleExamButtonClick = (examName: RecommendExamNameType) => {
     setShowModal(true);
     setExam(examName);
   };
@@ -26,18 +29,15 @@ export function Exam() {
         <section className="py-2">
           <SectionTitle title="추천" hasButton={false} />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 ">
-            <TestButton
-              title="수능"
-              onClick={() => handleExamButtonClick("수능")}
-            />
-            <TestButton
-              title="토익"
-              onClick={() => handleExamButtonClick("토익")}
-            />
-            <TestButton
-              title="기사"
-              onClick={() => handleExamButtonClick("기사")}
-            />
+            {Object.keys(RECOMMEND_EXAM_TIME).map((examName) => (
+              <TestButton
+                key={examName}
+                title={examName}
+                onClick={() =>
+                  handleExamButtonClick(examName as RecommendExamNameType)
+                }
+              />
+            ))}
           </div>
         </section>
         <section className="py-2">
