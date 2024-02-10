@@ -18,8 +18,8 @@ export function NavItem({ title, iconName, path, isActive }: Props) {
           <span
             className={`text-sm ${
               isActive
-                ? "text-my-color font-semibold"
-                : "text-text-default dark:text-text-dark"
+                ? "text-main-color font-semibold"
+                : "text-text dark:text-text-dark"
             } `}
           >
             {title}

@@ -12,7 +12,7 @@ export function SectionTitle({ title, hasButton }: Props) {
   return (
     <div className="flex justify-between items-center w-full py-2">
       <Fragment>
-        <h2 className="font-semibold text-lg text-text-default dark:text-text-dark">
+        <h2 className="font-semibold text-lg text-text dark:text-text-dark">
           {title}
         </h2>
       </Fragment>

@@ -5,19 +5,46 @@ export default {
   theme: {
     extend: {
       colors: {
-        "my-color": "#3782cc",
-
-        "examBtn-default": "#F2F4F6",
-        "examBtn-dark": "#20202C",
-
-        "text-default": "#000000",
-        "text-dark": "#FFFFFF",
-
-        "border-default": "#cbd5e1",
-        "border-dark": "#475569",
-
-        "subBtn-default": "#E9F4FE",
-        "subBtn-dark": "#2C2C37",
+        "main-color": {
+          light: "#3782cc",
+          DEFAULT: "#3782cc",
+          dark: "hsl(210, 70%, 50%)",
+        },
+        theme: {
+          light: "#FFFFFF",
+          DEFAULT: "#FFFFFF",
+          dark: "#121212",
+        },
+        "modal-bg": {
+          light: "#FFFFFF",
+          DEFAULT: "#FFFFFF",
+          dark: "#242527",
+        },
+        "modal-layer-bg": {
+          light: "#F2F4F6",
+          DEFAULT: "#F2F4F6",
+          dark: "#39393B",
+        },
+        text: {
+          light: "#000000",
+          DEFAULT: "#000000",
+          dark: "#FFFFFF",
+        },
+        "button-bg": {
+          light: "#F2F4F6",
+          DEFAULT: "#F2F4F6",
+          dark: "#20202C",
+        },
+        "subButton-bg": {
+          light: "#E9F4FE",
+          DEFAULT: "#E9F4FE",
+          dark: "#2C2C37",
+        },
+        border: {
+          light: "#cbd5e1",
+          DEFAULT: "#cbd5e1",
+          dark: "#475569",
+        },
       },
       fontSize: {
         sm: "0.8rem",
