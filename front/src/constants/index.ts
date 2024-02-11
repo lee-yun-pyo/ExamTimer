@@ -32,3 +32,9 @@ export const RECOMMEND_EXAM_TIME: RecommendExamInfoType = {
         {title: "탐구2", time: "16:07 ~ 16:37"},
     ] 
 } as const;
+
+export enum ModalType {
+    START_EXAM = "START_EXAM",
+    SELECT_EXAM = "SELECT_EXAM",
+    STOP_EXAM = "STOP_EXAM",
+}

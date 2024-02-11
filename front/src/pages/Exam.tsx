@@ -1,25 +1,29 @@
 import { useState } from "react";
-import { createPortal } from "react-dom";
 
 import { SectionTitle } from "@/components/Home/SectionTitle";
 import { TestButton } from "@/components/Home/TestButton";
 import { Title } from "@/components/common/Title";
-import { Modal } from "@/components/common/Modal";
+import { ModalPortal } from "@/components/common/ModalPortal";
+import { PopupModal } from "@/components/common/PopupModal";
+
+import { useModalContext } from "@/hooks/useModalContext";
 
 import { RecommendExamNameType } from "@/types";
-import { RECOMMEND_EXAM_TIME } from "@/constants";
+import { ModalType, RECOMMEND_EXAM_TIME } from "@/constants";
 
 export function Exam() {
-  const [showModal, setShowModal] = useState(false);
   const [exam, setExam] = useState<RecommendExamNameType>("수능");
 
+  const { handleOpen, handleClose } = useModalContext();
+
   const handleExamButtonClick = (examName: RecommendExamNameType) => {
-    setShowModal(true);
     setExam(examName);
+    handleOpen();
   };
 
-  const removeModal = () => {
-    setShowModal(false);
+  const handleStartButtonClick = () => {
+    // TODO: 시험시작 처리 로직 설계
+    handleClose();
   };
 
   return (
@@ -45,11 +49,13 @@ export function Exam() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 "></div>
         </section>
       </div>
-      {showModal &&
-        createPortal(
-          <Modal examName={exam} removeModal={removeModal} />,
-          document.body
-        )}
+      <ModalPortal>
+        <PopupModal
+          type={ModalType.START_EXAM}
+          onClick={handleStartButtonClick}
+          examName={exam}
+        />
+      </ModalPortal>
     </main>
   );
 }
