@@ -2,11 +2,14 @@ interface Props {
   title: string;
   time: string;
   onClick: () => void;
+  isSelected: boolean;
 }
-export function ModalExamButton({ title, time, onClick }: Props) {
+export function ModalExamButton({ title, time, onClick, isSelected }: Props) {
   return (
     <div
-      className="w-full py-3 px-6 flex flex-col gap-px bg-modal-layer-bg dark:bg-modal-layer-bg-dark rounded-xl"
+      className={`w-full py-2.5 px-6 flex flex-col gap-px bg-modal-layer-bg dark:bg-modal-layer-bg-dark rounded-xl border-[3px] ${
+        isSelected ? "border-main-color" : "border-transparent"
+      }`}
       onClick={onClick}
     >
       <span className="text-base font-semibold text-text dark:text-text-dark">

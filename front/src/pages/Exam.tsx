@@ -18,7 +18,7 @@ export function Exam() {
     setExam(examName);
   };
 
-  const hideModal = () => {
+  const removeModal = () => {
     setShowModal(false);
   };
 
@@ -47,7 +47,7 @@ export function Exam() {
       </div>
       {showModal &&
         createPortal(
-          <Modal examName={exam} onClick={hideModal} />,
+          <Modal examName={exam} removeModal={removeModal} />,
           document.body
         )}
     </main>

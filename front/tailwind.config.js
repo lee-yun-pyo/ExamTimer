@@ -9,6 +9,7 @@ export default {
           light: "#3782cc",
           DEFAULT: "#3782cc",
           dark: "hsl(210, 70%, 50%)",
+          disabled: "hsl(210, 40%, 40%)",
         },
         theme: {
           light: "#FFFFFF",
@@ -29,6 +30,7 @@ export default {
           light: "#000000",
           DEFAULT: "#000000",
           dark: "#FFFFFF",
+          disabled: "hsl(0, 10%, 90%)",
         },
         "button-bg": {
           light: "#F2F4F6",
