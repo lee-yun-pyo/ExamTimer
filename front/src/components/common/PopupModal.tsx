@@ -32,6 +32,16 @@ export function PopupModal({ type, examName, onClick }: Props) {
           text: "시작하기",
           content: <ExamModal examName={examName!} />,
         };
+      case ModalType.CREATE_EXAM:
+        return {
+          text: "만들기",
+          content: "",
+        };
+      case ModalType.DELETE_EXAM:
+        return {
+          text: "삭제하기",
+          content: <DeleteExamConent />,
+        };
     }
   })();
 
@@ -65,6 +75,16 @@ export function PopupModal({ type, examName, onClick }: Props) {
       <div className="w-full flex items-center justify-center py-2">
         <span className="text-text dark:text-text-dark text-base font-semibold">
           시험을 종료할까요?
+        </span>
+      </div>
+    );
+  }
+
+  function DeleteExamConent() {
+    return (
+      <div className="w-full flex items-center justify-center py-2">
+        <span className="text-text dark:text-text-dark text-base font-semibold">
+          선택한 시험을 삭제할까요?
         </span>
       </div>
     );
