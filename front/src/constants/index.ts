@@ -37,4 +37,6 @@ export enum ModalType {
     START_EXAM = "START_EXAM",
     SELECT_EXAM = "SELECT_EXAM",
     STOP_EXAM = "STOP_EXAM",
+    CREATE_EXAM = "CREATE_EXAM",
+    DELETE_EXAM = "DELETE_EXAM",
 }
