@@ -35,19 +35,15 @@ export function Exam() {
   const handleStartButtonClick = (modalType: ModalType) => {
     switch (modalType) {
       case ModalType.CREATE_EXAM:
-        console.log("CREATE_EXAM");
         // TODO: 시험 생성 처리 로직 설계
         break;
       case ModalType.DELETE_EXAM:
-        console.log("DELETE_EXAM");
         // TODO: 시험 삭제 처리 로직 설계
         break;
       case ModalType.SELECT_EXAM:
-        console.log("SELECT_EXAM");
         // TODO: 시험 선택 처리 로직 설계
         break;
       case ModalType.START_EXAM:
-        console.log("START_EXAM");
         // TODO: 시험 시작 처리 로직 설계
         break;
     }
