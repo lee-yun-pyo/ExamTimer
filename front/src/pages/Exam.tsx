@@ -54,11 +54,6 @@ export function Exam() {
     setIsEdit((prev) => !prev);
   };
 
-  const handleExamPlusButtonClick = () => {
-    modalType.current = ModalType.CREATE_EXAM;
-    handleOpen();
-  };
-
   const handleExamDeleteButtonClick = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     modalType.current = ModalType.DELETE_EXAM;
@@ -90,7 +85,7 @@ export function Exam() {
             onClick={handleEditButtonClick}
           />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-            {isEdit && <ExamPlusButton onClick={handleExamPlusButtonClick} />}
+            {isEdit && <ExamPlusButton />}
             {Object.keys(RECOMMEND_EXAM_TIME).map((examName) => (
               <TestButton
                 key={examName}

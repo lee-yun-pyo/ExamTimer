@@ -32,11 +32,6 @@ export function PopupModal({ type, examName, onClick }: Props) {
           text: "시작하기",
           content: <ExamModal examName={examName!} />,
         };
-      case ModalType.CREATE_EXAM:
-        return {
-          text: "만들기",
-          content: "",
-        };
       case ModalType.DELETE_EXAM:
         return {
           text: "삭제하기",
