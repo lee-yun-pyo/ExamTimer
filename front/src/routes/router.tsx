@@ -1,8 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 
+import { Exam } from "@/pages/Exam";
+import { CreateExam } from "@/pages/CreateExam";
+
 import { Layout } from "@/components/common/Layout";
 import { Title } from "@/components/common/Title";
-import { Exam } from "@/pages/Exam";
 
 export const router = createBrowserRouter([
   {
@@ -22,5 +24,9 @@ export const router = createBrowserRouter([
         element: <Title />,
       },
     ],
+  },
+  {
+    path: "create-exam",
+    element: <CreateExam />,
   },
 ]);

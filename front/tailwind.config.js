@@ -30,6 +30,7 @@ export default {
           light: "#000000",
           DEFAULT: "#000000",
           dark: "#FFFFFF",
+          "sub-light": "#7F7F7F",
           disabled: "hsl(0, 10%, 90%)",
         },
         "button-bg": {

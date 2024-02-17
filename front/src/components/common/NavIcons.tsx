@@ -10,25 +10,17 @@ interface Props {
 }
 
 export function NavIcons({ iconName, isActive }: Props) {
-  const isDarkMode = document.documentElement.classList.contains("dark");
-
   let iconToRender;
 
   switch (iconName) {
     case "HourClock":
-      iconToRender = (
-        <HourClockIcon size={20} isDarkMode={isDarkMode} isActive={isActive} />
-      );
+      iconToRender = <HourClockIcon size={20} isActive={isActive} />;
       break;
     case "ExamTimer":
-      iconToRender = (
-        <ExamTimerIcon size={20} isDarkMode={isDarkMode} isActive={isActive} />
-      );
+      iconToRender = <ExamTimerIcon size={20} isActive={isActive} />;
       break;
     case "Calendar":
-      iconToRender = (
-        <CalendarIcon size={20} isDarkMode={isDarkMode} isActive={isActive} />
-      );
+      iconToRender = <CalendarIcon size={20} isActive={isActive} />;
       break;
     default:
       break;

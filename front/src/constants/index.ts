@@ -1,6 +1,7 @@
 import { RecommendExamInfoType } from "@/types";
 
 export const MY_COLOR = "#3782cc";
+export const IS_DARK_MODE = document.documentElement.classList.contains("dark");
 
 export const NAVIGATION_ITEMS = {
     "": {
