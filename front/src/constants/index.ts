@@ -40,4 +40,15 @@ export enum ModalType {
     STOP_EXAM = "STOP_EXAM",
     CREATE_EXAM = "CREATE_EXAM",
     DELETE_EXAM = "DELETE_EXAM",
+    SET_TIME = "SET_TIME",
 }
+
+export const HOURS = Array.from({ length: 12 }, (_, index) =>
+  (index+1).toString().padStart(2, "0")
+);
+
+export const MINUTES = Array.from({ length: 60 }, (_, index) =>
+  index.toString().padStart(2, "0")
+);
+
+export const NOON = ["AM", "PM"]

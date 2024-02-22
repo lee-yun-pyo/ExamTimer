@@ -1,5 +1,6 @@
 import { ModalButon } from "@/components/Home/Modal/ModalButton";
 import { ExamModal } from "@/components/common/ExamModal";
+import { TimeSlider } from "@/components/CreateExam/TimeSlider";
 
 import { useModalContext } from "@/hooks/useModalContext";
 
@@ -36,6 +37,11 @@ export function PopupModal({ type, examName, onClick }: Props) {
         return {
           text: "삭제하기",
           content: <DeleteExamConent />,
+        };
+      case ModalType.SET_TIME:
+        return {
+          text: "설정",
+          content: <TimeSlider />,
         };
     }
   })();
