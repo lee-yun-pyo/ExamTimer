@@ -2,25 +2,40 @@ import { useRef } from "react";
 
 import { BackIcon } from "@/components/Icons/BackIcon";
 import { DownArrorIcon } from "@/components/Icons/DownArrowIcon";
-
-import { ModalType } from "@/constants";
-import { useModalContext } from "@/hooks/useModalContext";
 import { ModalPortal } from "@/components/common/ModalPortal";
 import { PopupModal } from "@/components/common/PopupModal";
+
+import { ModalType } from "@/constants";
+
+import { useSetTimeContext } from "@/hooks/useSetTimeContext";
+import { useModalContext } from "@/hooks/useModalContext";
 
 export function CreateExam() {
   const modalType = useRef<ModalType | null>();
 
   const { handleOpen, handleClose } = useModalContext();
+  const { handleChangeTimeState, startTime, endTime, handleSetTimeMode } =
+    useSetTimeContext();
 
-  const handleSetTimerBtnClick = () => {
+  /**
+   * 시간 종류 버튼 클릭 시
+   * @param mode 시간 종류 (1. 시작시간, 2. 종료 시간)
+   */
+  const handleSetTimerBtnClick = (mode: number) => {
     modalType.current = ModalType.SET_TIME;
+    handleSetTimeMode(mode);
     handleOpen();
   };
 
+  /**
+   * 시간 설정 모달창 확인 버튼 클릭 시
+   */
   const handleSetTimerConfirm = () => {
+    handleChangeTimeState();
     handleClose();
   };
+
+  const handleSubmit = () => {};
 
   return (
     <div className="w-full h-screen px-4 py-4 bg-theme-light dark:bg-theme-dark">
@@ -30,7 +45,7 @@ export function CreateExam() {
       <h1 className="font-semibold text-xl text-text dark:text-text-dark">
         시험 타이머 설정
       </h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="relative my-3">
           <input
             id="examTitle"
@@ -54,18 +69,21 @@ export function CreateExam() {
         <div className="flex flex-col gap-3">
           <div
             className="flex justify-between px-4 py-4 bg-button-bg dark:bg-button-bg-dark rounded-lg font-semibold text-text dark:text-text-dark"
-            onClick={handleSetTimerBtnClick}
+            onClick={() => handleSetTimerBtnClick(1)}
           >
             <span>시작 시간</span>
             <div className="flex items-center gap-2">
-              <span>11:00 AM</span>
+              <span>{startTime}</span>
               <DownArrorIcon size={20} />
             </div>
           </div>
-          <div className="flex justify-between px-4 py-4 bg-button-bg dark:bg-button-bg-dark rounded-lg font-semibold text-text dark:text-text-dark">
+          <div
+            className="flex justify-between px-4 py-4 bg-button-bg dark:bg-button-bg-dark rounded-lg font-semibold text-text dark:text-text-dark"
+            onClick={() => handleSetTimerBtnClick(2)}
+          >
             <span>종료 시간</span>
             <div className="flex items-center gap-2">
-              <span>12:00 PM</span>
+              <span>{endTime}</span>
               <DownArrorIcon size={20} />
             </div>
           </div>

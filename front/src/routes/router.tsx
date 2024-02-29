@@ -5,6 +5,7 @@ import { CreateExam } from "@/pages/CreateExam";
 
 import { Layout } from "@/components/common/Layout";
 import { Title } from "@/components/common/Title";
+import { SetTimeProvider } from "@/components/common/SetTimeProvider";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
   },
   {
     path: "create-exam",
-    element: <CreateExam />,
+    element: (
+      <SetTimeProvider>
+        <CreateExam />
+      </SetTimeProvider>
+    ),
   },
 ]);
