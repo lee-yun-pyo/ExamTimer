@@ -6,14 +6,16 @@ import { useModalContext } from "@/hooks/useModalContext";
 
 import { RecommendExamNameType } from "@/types";
 import { ModalType } from "@/constants";
+import { CheckTimeInfo } from "./CheckTimeInfo";
 
 interface Props {
   type: ModalType;
   examName?: RecommendExamNameType;
+  inputExamName?: string;
   onClick: () => void;
 }
 
-export function PopupModal({ type, examName, onClick }: Props) {
+export function PopupModal({ type, examName, inputExamName, onClick }: Props) {
   const { handleClose } = useModalContext();
 
   const state = (function () {
@@ -42,6 +44,11 @@ export function PopupModal({ type, examName, onClick }: Props) {
         return {
           text: "설정",
           content: <TimeSlider />,
+        };
+      case ModalType.CHECK_INPUT_INFO:
+        return {
+          text: "만들기",
+          content: <CheckTimeInfo examTitle={inputExamName!} />,
         };
     }
   })();

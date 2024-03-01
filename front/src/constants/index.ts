@@ -41,6 +41,7 @@ export enum ModalType {
     CREATE_EXAM = "CREATE_EXAM",
     DELETE_EXAM = "DELETE_EXAM",
     SET_TIME = "SET_TIME",
+    CHECK_INPUT_INFO = "CHECK_INPUT_INFO",
 }
 
 export const HOURS = Array.from({ length: 12 }, (_, index) =>
