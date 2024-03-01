@@ -39,7 +39,7 @@ export function CreateExam() {
 
   return (
     <div className="w-full h-screen px-4 py-4 bg-theme-light dark:bg-theme-dark">
-      <nav className="my-2">
+      <nav className="flex my-2">
         <BackIcon size={25} />
       </nav>
       <h1 className="font-semibold text-xl text-text dark:text-text-dark">

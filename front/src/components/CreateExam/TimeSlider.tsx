@@ -12,9 +12,10 @@ export function TimeSlider() {
   const [minutes, setMinutes] = useState(0);
   const [noons, setNoons] = useState(0);
 
-  const { timeRef, handleChangeTimeRef } = useSetTimeContext();
+  const { handleChangeTimeRef, startTime, endTime, timeMode } =
+    useSetTimeContext();
 
-  const [time, noonRef] = timeRef.split(" ");
+  const [time, noonRef] = (timeMode === 1 ? startTime : endTime).split(" ");
   const [hourRef, minuteRef] = time.split(":").map(Number);
 
   useEffect(() => {
