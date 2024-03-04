@@ -63,7 +63,7 @@ export function Exam() {
   return (
     <main>
       <Title />
-      <div className="px-4">
+      <div className="container">
         <section className="py-2">
           <SectionTitle title="추천" hasButton={false} />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 ">
