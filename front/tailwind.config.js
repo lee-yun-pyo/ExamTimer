@@ -48,6 +48,25 @@ export default {
           DEFAULT: "#cbd5e1",
           dark: "#475569",
         },
+        warning: {
+          light: "#ff6b6b",
+          DEFAULT: "#ff6b6b",
+          dark: "#ff6b6b",
+        },
+      },
+      animation: {
+        showing: "show 0.2s linear forwards",
+        hiding: "hide 0.2s linear forwards",
+      },
+      keyframes: {
+        show: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
+        hide: {
+          "0%": { opacity: 1 },
+          "100%": { opacity: 0 },
+        },
       },
       fontSize: {
         sm: "0.8rem",

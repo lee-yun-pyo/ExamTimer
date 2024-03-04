@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { BackIcon } from "@/components/Icons/BackIcon";
 import { DownArrorIcon } from "@/components/Icons/DownArrowIcon";
@@ -9,9 +9,14 @@ import { ModalType } from "@/constants";
 
 import { useSetTimeContext } from "@/hooks/useSetTimeContext";
 import { useModalContext } from "@/hooks/useModalContext";
+import { calculateTimeDifference } from "@/utils";
 
 export function CreateExam() {
-  const modalType = useRef<ModalType | null>();
+  const [hasWarning, setHasWarning] = useState("");
+  const [examName, setExamName] = useState("");
+
+  const modalType = useRef<ModalType | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const { handleOpen, handleClose } = useModalContext();
   const { handleChangeTimeState, startTime, endTime, handleSetTimeMode } =
@@ -39,9 +44,30 @@ export function CreateExam() {
    * 설정하기 버튼 클릭 시 => 입력정보 확인 모달 출력
    */
   const handleSettingBtnClick = () => {
+    setHasWarning("");
+    if (inputRef.current) {
+      if (inputRef.current.value === "") {
+        setHasWarning("시험 이름을 입력하세요");
+        return;
+      }
+      setExamName(inputRef.current.value);
+    }
+    const timeDiff = calculateTimeDifference(startTime, endTime);
+    if (timeDiff <= 0) {
+      setHasWarning("시작 또는 종료 시간을 조절해주세요");
+      return;
+    }
     modalType.current = ModalType.CHECK_INPUT_INFO;
     handleOpen();
   };
+
+  useEffect(() => {
+    if (hasWarning !== "") {
+      setTimeout(() => {
+        setHasWarning("");
+      }, 2000);
+    }
+  }, [hasWarning]);
 
   return (
     <div className="w-full h-screen px-4 py-4 bg-theme-light dark:bg-theme-dark">
@@ -53,7 +79,9 @@ export function CreateExam() {
       </h1>
       <div className="relative my-3">
         <input
+          ref={inputRef}
           id="examTitle"
+          maxLength={10}
           type="text"
           placeholder=""
           className="text-left text-lg px-2 py-3 w-full outline-none 
@@ -68,7 +96,7 @@ export function CreateExam() {
           htmlFor="examTitle"
           className="absolute left-2 top-3 text-lg text-text-sub-light origin-left duration-200 pointer-events-none"
         >
-          시험 이름 입력
+          시험 이름 입력 (최대 10자)
         </label>
       </div>
       <div className="flex flex-col gap-3">
@@ -93,6 +121,17 @@ export function CreateExam() {
           </div>
         </div>
       </div>
+      <div
+        className={`fixed w-fit flex bottom-24 left-0 right-0 mx-auto justify-center px-6 py-3 bg-button-bg dark:bg-button-bg-dark rounded-full ${
+          hasWarning !== "" ? "animate-showing" : "animate-hiding"
+        }`}
+      >
+        <p
+          className={`inline-block font-semibold text-base text-warning-light dark:text-warning-dark`}
+        >
+          {hasWarning}
+        </p>
+      </div>
       <button
         className="fixed bottom-6 left-0 right-0 mx-auto w-11/12 bg-main-color dark:bg-main-color-dark py-3 text-text-dark font-semibold rounded-lg"
         onClick={handleSettingBtnClick}
@@ -103,7 +142,7 @@ export function CreateExam() {
         <PopupModal
           type={modalType.current!}
           onClick={handleSetTimerConfirm}
-          inputExamName={"시험 예시"}
+          inputExamName={examName}
         />
       </ModalPortal>
     </div>
