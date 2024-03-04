@@ -16,10 +16,10 @@ export function NavItem({ title, iconName, path, isActive }: Props) {
         <div className="flex flex-col items-center gap-1">
           <NavIcons iconName={iconName} isActive={isActive} />
           <span
-            className={`text-base  ${
+            className={`text-sm ${
               isActive
-                ? "text-my-color font-semibold"
-                : "text-text-default dark:text-text-dark"
+                ? "text-main-color font-semibold"
+                : "text-text dark:text-text-dark"
             } `}
           >
             {title}

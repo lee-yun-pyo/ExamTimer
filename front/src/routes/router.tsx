@@ -1,7 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 
+import { Exam } from "@/pages/Exam";
+import { CreateExam } from "@/pages/CreateExam";
+
 import { Layout } from "@/components/common/Layout";
 import { Title } from "@/components/common/Title";
+import { SetTimeProvider } from "@/components/common/SetTimeProvider";
 
 export const router = createBrowserRouter([
   {
@@ -10,7 +14,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Title />,
+        element: <Exam />,
       },
       {
         path: "1hour",
@@ -21,5 +25,13 @@ export const router = createBrowserRouter([
         element: <Title />,
       },
     ],
+  },
+  {
+    path: "create-exam",
+    element: (
+      <SetTimeProvider>
+        <CreateExam />
+      </SetTimeProvider>
+    ),
   },
 ]);

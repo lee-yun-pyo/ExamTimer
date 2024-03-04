@@ -9,7 +9,9 @@ export function Title() {
   const title = NAVIGATION_ITEMS[titlePath].title;
   return (
     <header className="w-full flex items-center justify-center py-4">
-      <h1 className="text-2xl font-semibold">{title}</h1>
+      <h1 className="text-lg font-semibold text-text dark:text-text-dark">
+        {title}
+      </h1>
     </header>
   );
 }

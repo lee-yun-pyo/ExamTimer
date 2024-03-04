@@ -9,7 +9,7 @@ export function Navigation() {
   const { pathname } = useLocation();
   const titlePath = pathname.split("/")[1] as NavItemType;
   return (
-    <nav className="w-full fixed bottom-0 left-0 py-4 border-t border-border-default dark:border-border-dark rounded-t-3xl">
+    <nav className="w-full fixed bottom-0 left-0 py-4 border-t border-border dark:border-border-dark rounded-t-3xl z-99 box-border">
       <ul className="flex items-center justify-around">
         {Object.entries(NAVIGATION_ITEMS).map(([path, { title, icon }]) => (
           <NavItem
