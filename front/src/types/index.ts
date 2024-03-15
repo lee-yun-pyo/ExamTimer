@@ -11,3 +11,9 @@ export interface RecommendExamInfoType {
 }
 
 export type RecommendExamNameType = keyof typeof RECOMMEND_EXAM_TIME;
+
+export interface DBExamInfoType {
+    examName: string;
+    startTime: string;
+    endTime: string;
+}
