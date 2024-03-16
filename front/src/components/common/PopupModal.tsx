@@ -1,6 +1,7 @@
 import { ModalButon } from "@/components/Home/Modal/ModalButton";
 import { ExamModal } from "@/components/common/ExamModal";
 import { TimeSlider } from "@/components/CreateExam/TimeSlider";
+import { CheckTimeInfo } from "@/components/common/CheckTimeInfo";
 
 import { useModalContext } from "@/hooks/useModalContext";
 
@@ -10,7 +11,6 @@ import {
   StartExamContentType,
 } from "@/types";
 import { ModalType } from "@/constants";
-import { CheckTimeInfo } from "./CheckTimeInfo";
 
 interface Props {
   type: ModalType;

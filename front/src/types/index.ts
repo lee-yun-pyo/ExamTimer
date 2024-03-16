@@ -2,7 +2,8 @@ import { RECOMMEND_EXAM_TIME } from "@/constants";
 
 export interface ExamInfoType {
     title: string;
-    time: string;
+    startTime: string;
+    endTime: string;
 }
 
 export interface RecommendExamInfoType {
