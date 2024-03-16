@@ -4,14 +4,16 @@ import { DeleteIcon } from "@/components/Icons/DeleteIcon";
 
 interface Props {
   title: string;
-  time?: string;
+  startTime?: string;
+  endTime?: string;
   onExamBtnClick: () => void;
   onDeleteBtnClick?: (event: MouseEvent<HTMLDivElement>) => void;
   isEdit?: boolean;
 }
 export function TestButton({
   title,
-  time,
+  startTime,
+  endTime,
   onExamBtnClick,
   onDeleteBtnClick,
   isEdit,
@@ -24,8 +26,8 @@ export function TestButton({
       <span className="font-semibold text-lg text-text dark:text-text-dark">
         {title}
       </span>
-      {time && (
-        <span className="text-sm text-text dark:text-text-dark">{time}</span>
+      {startTime && endTime && (
+        <span className="text-sm text-text dark:text-text-dark">{`${startTime} ~ ${endTime}`}</span>
       )}
       {isEdit && <DeleteIcon size={15} onClick={onDeleteBtnClick!} />}
     </div>

@@ -4,7 +4,11 @@ import { TimeSlider } from "@/components/CreateExam/TimeSlider";
 
 import { useModalContext } from "@/hooks/useModalContext";
 
-import { RecommendExamNameType } from "@/types";
+import {
+  DBExamInfoType,
+  RecommendExamNameType,
+  StartExamContentType,
+} from "@/types";
 import { ModalType } from "@/constants";
 import { CheckTimeInfo } from "./CheckTimeInfo";
 
@@ -12,10 +16,17 @@ interface Props {
   type: ModalType;
   examName?: RecommendExamNameType;
   inputExamName?: string;
+  selectedExam?: DBExamInfoType;
   onClick: () => void;
 }
 
-export function PopupModal({ type, examName, inputExamName, onClick }: Props) {
+export function PopupModal({
+  type,
+  examName,
+  selectedExam,
+  inputExamName,
+  onClick,
+}: Props) {
   const { handleClose } = useModalContext();
 
   const state = (function () {
@@ -23,7 +34,7 @@ export function PopupModal({ type, examName, inputExamName, onClick }: Props) {
       case ModalType.START_EXAM:
         return {
           text: "시작하기",
-          content: <StartExamContent />,
+          content: <StartExamContent examInfo={selectedExam!} />,
         };
       case ModalType.STOP_EXAM:
         return {
@@ -68,12 +79,19 @@ export function PopupModal({ type, examName, inputExamName, onClick }: Props) {
     </div>
   );
 
-  function StartExamContent() {
+  function StartExamContent({ examInfo }: StartExamContentType) {
     return (
-      <div className="w-full flex items-center justify-center py-2">
-        <span className="text-text dark:text-text-dark text-base font-semibold">
-          시험을 시작할까요?
-        </span>
+      <div className="flex flex-col">
+        <div className="flex flex-col gap-2">
+          <h3 className="text-center text-xl text-text dark:text-text-dark font-semibold">
+            {examInfo.examName}
+          </h3>
+        </div>
+        <div className="w-full flex items-center justify-center py-2">
+          <span className="text-text dark:text-text-dark text-base font-semibold">
+            시험을 시작할까요?
+          </span>
+        </div>
       </div>
     );
   }

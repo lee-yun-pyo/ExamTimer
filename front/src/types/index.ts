@@ -17,3 +17,7 @@ export interface DBExamInfoType {
     startTime: string;
     endTime: string;
 }
+
+export interface StartExamContentType {
+    examInfo: DBExamInfoType
+}
