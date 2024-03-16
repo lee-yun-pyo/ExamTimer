@@ -45,11 +45,15 @@ export enum ModalType {
 }
 
 export const HOURS = Array.from({ length: 24 }, (_, index) =>
-  (index).toString().padStart(2, "0")
+  index.toString().padStart(2, "0")
 );
 
 export const MINUTES = Array.from({ length: 60 }, (_, index) =>
   index.toString().padStart(2, "0")
 );
 
-export const NOON = ["AM", "PM"]
+export enum TimeUnitType {
+    MINUTES = "MINUTES",
+    HOURS = "HOURS",
+}
+  

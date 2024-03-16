@@ -7,7 +7,7 @@ interface SetTimeContextType {
   endTime: string;
   timeRef: string;
   handleChangeTimeState: () => void;
-  handleChangeTimeRef: (hour: number, minute: number, noon: number) => void;
+  handleChangeTimeRef: (hour: number, minute: number) => void;
   handleSetTimeMode: (mode: number) => void;
   timeMode: number;
 }
@@ -15,7 +15,7 @@ interface SetTimeContextType {
 export const SetTimeContext = createContext<SetTimeContextType>({
   startTime: "",
   endTime: "",
-  timeRef: "00:00 AM",
+  timeRef: "00:00",
   handleChangeTimeState: () => {},
   handleChangeTimeRef: () => {},
   handleSetTimeMode: () => {},
@@ -31,16 +31,15 @@ export function SetTimeProvider({ children }: SetTimeProviderProps) {
   const [endTime, setEndTime] = useState(""); // 종료 시간
   const [timeMode, setTimeMode] = useState(1); // 변경할 시간 종류 선택
 
-  const timeRef = useRef<string>("12:00 AM"); // 변경 중인 시간
+  const timeRef = useRef<string>("00:00"); // 변경 중인 시간
 
   /**
    *  슬라이더를 이용한 시간 변경 시 값 유지
    * @param hour 시
    * @param minute 분
-   * @param noon AM | PM
    */
-  const handleChangeTimeRef = (hour: number, minute: number, noon: number) => {
-    timeRef.current = convertToTimeFormat(hour, minute, noon);
+  const handleChangeTimeRef = (hour: number, minute: number) => {
+    timeRef.current = convertToTimeFormat(hour, minute);
   };
 
   /**
