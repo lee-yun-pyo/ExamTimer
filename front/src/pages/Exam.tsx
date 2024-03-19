@@ -12,15 +12,21 @@ import { ModalType, RECOMMEND_EXAM_TIME } from "@/constants";
 
 import { useModalContext } from "@/hooks/useModalContext";
 import { useExamDataStore } from "@/hooks/useExamDataStore";
+import { usePostRequest } from "@/hooks/usePostRequest";
 
 export function Exam() {
   const modalType = useRef<ModalType | null>();
+  const examIdRef = useRef<number>(0);
   const [isEdit, setIsEdit] = useState(false);
   const [exam, setExam] = useState<RecommendExamNameType | null>();
   const [selectedExam, setSelectedExam] = useState<DBExamInfoType | null>(null);
-  const { result: examData } = useExamDataStore<DBExamInfoType[]>({
-    method: "GET_ALL",
-  });
+
+  const { result: examData, handleDelete } = useExamDataStore<DBExamInfoType[]>(
+    {
+      method: "GET_ALL",
+    }
+  );
+  const { postProcessData } = usePostRequest<DBExamInfoType>();
   const { handleOpen, handleClose } = useModalContext();
 
   const handleRecommendExamClick = (examName: RecommendExamNameType) => {
@@ -33,8 +39,12 @@ export function Exam() {
     showModalByModalType(ModalType.START_EXAM);
   };
 
-  const handleExamDeleteButtonClick = (event: MouseEvent<HTMLDivElement>) => {
+  const handleExamDeleteButtonClick = (
+    event: MouseEvent<HTMLDivElement>,
+    id: number
+  ) => {
     event.stopPropagation();
+    examIdRef.current = id;
     showModalByModalType(ModalType.DELETE_EXAM);
   };
 
@@ -49,7 +59,8 @@ export function Exam() {
         // TODO: 시험 생성 처리 로직 설계
         break;
       case ModalType.DELETE_EXAM:
-        // TODO: 시험 삭제 처리 로직 설계
+        handleDelete(examIdRef.current);
+        postProcessData({ method: "DELETE", id: examIdRef.current });
         break;
       case ModalType.SELECT_EXAM:
         // TODO: 시험 선택 처리 로직 설계
@@ -100,7 +111,9 @@ export function Exam() {
                   endTime={exam.endTime}
                   title={exam.examName}
                   onExamBtnClick={() => handleExamStartButtonClick(exam)}
-                  onDeleteBtnClick={handleExamDeleteButtonClick}
+                  onDeleteBtnClick={(event) =>
+                    handleExamDeleteButtonClick(event, exam.id)
+                  }
                   isEdit={isEdit}
                 />
               ))}
