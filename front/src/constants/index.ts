@@ -56,4 +56,5 @@ export enum TimeUnitType {
     MINUTES = "MINUTES",
     HOURS = "HOURS",
 }
-  
+
+export const DB_NAME = "example";

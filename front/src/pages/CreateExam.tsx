@@ -6,12 +6,12 @@ import { ModalPortal } from "@/components/common/ModalPortal";
 import { PopupModal } from "@/components/common/PopupModal";
 
 import { ModalType } from "@/constants";
+import { calculateTimeDifference } from "@/utils";
+import { DBExamInfoType } from "@/types";
 
 import { useSetTimeContext } from "@/hooks/useSetTimeContext";
 import { useModalContext } from "@/hooks/useModalContext";
-import { calculateTimeDifference } from "@/utils";
-import { createExamDB } from "@/db/ExamData";
-import { DBExamInfoType } from "@/types";
+import { usePostRequest } from "@/hooks/usePostRequest";
 
 export function CreateExam() {
   const [hasWarning, setHasWarning] = useState("");
@@ -24,19 +24,8 @@ export function CreateExam() {
   const { handleChangeTimeState, startTime, endTime, handleSetTimeMode } =
     useSetTimeContext();
 
-  const initDB = async ({ examName, startTime, endTime }: DBExamInfoType) => {
-    try {
-      let examDataDB = await createExamDB("example");
+  const { postProcessData } = usePostRequest<DBExamInfoType>();
 
-      await examDataDB.createExamData({
-        examName,
-        startTime,
-        endTime,
-      });
-    } catch {
-      throw new Error("시험을 생성할 수 없습니다.");
-    }
-  };
   /**
    * 시간 종류 버튼 클릭 시
    * @param mode 시간 종류 (1. 시작시간, 2. 종료 시간)
@@ -62,7 +51,7 @@ export function CreateExam() {
           startTime,
           endTime,
         };
-        initDB(createdExam);
+        postProcessData({ method: "CREATE", data: createdExam });
         break;
     }
     handleClose();

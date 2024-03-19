@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { MouseEvent, useRef, useState } from "react";
 
 import { SectionTitle } from "@/components/Home/SectionTitle";
 import { TestButton } from "@/components/Home/TestButton";
@@ -7,21 +7,20 @@ import { ModalPortal } from "@/components/common/ModalPortal";
 import { PopupModal } from "@/components/common/PopupModal";
 import { ExamPlusButton } from "@/components/Home/ExamPlusButton";
 
-import { useModalContext } from "@/hooks/useModalContext";
-
 import { DBExamInfoType, RecommendExamNameType } from "@/types";
 import { ModalType, RECOMMEND_EXAM_TIME } from "@/constants";
 
-import { createExamDB } from "@/db/ExamData";
+import { useModalContext } from "@/hooks/useModalContext";
+import { useExamDataStore } from "@/hooks/useExamDataStore";
 
 export function Exam() {
+  const modalType = useRef<ModalType | null>();
   const [isEdit, setIsEdit] = useState(false);
   const [exam, setExam] = useState<RecommendExamNameType | null>();
-  const [fetchedData, setFetchedData] = useState<DBExamInfoType[]>([]);
   const [selectedExam, setSelectedExam] = useState<DBExamInfoType | null>(null);
-
-  const modalType = useRef<ModalType | null>();
-
+  const { result: examData } = useExamDataStore<DBExamInfoType[]>({
+    method: "GET_ALL",
+  });
   const { handleOpen, handleClose } = useModalContext();
 
   const handleRecommendExamClick = (examName: RecommendExamNameType) => {
@@ -67,22 +66,6 @@ export function Exam() {
     setIsEdit((prev) => !prev);
   };
 
-  useEffect(() => {
-    async function initDB() {
-      try {
-        let examDataDB = await createExamDB("example");
-
-        const result = await examDataDB.getAllExamData();
-        setFetchedData(result.examList);
-      } catch {
-        console.log("시험을 불러올 수 없습니다.");
-        throw new Error("시험을 불러올 수 없습니다.");
-      }
-    }
-
-    initDB();
-  }, []);
-
   return (
     <main>
       <Title />
@@ -109,17 +92,18 @@ export function Exam() {
           />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
             {isEdit && <ExamPlusButton />}
-            {fetchedData.map((exam, idx) => (
-              <TestButton
-                key={idx}
-                startTime={exam.startTime}
-                endTime={exam.endTime}
-                title={exam.examName}
-                onExamBtnClick={() => handleExamStartButtonClick(exam)}
-                onDeleteBtnClick={handleExamDeleteButtonClick}
-                isEdit={isEdit}
-              />
-            ))}
+            {examData !== undefined &&
+              examData.map((exam, idx) => (
+                <TestButton
+                  key={idx}
+                  startTime={exam.startTime}
+                  endTime={exam.endTime}
+                  title={exam.examName}
+                  onExamBtnClick={() => handleExamStartButtonClick(exam)}
+                  onDeleteBtnClick={handleExamDeleteButtonClick}
+                  isEdit={isEdit}
+                />
+              ))}
           </div>
         </section>
       </div>
