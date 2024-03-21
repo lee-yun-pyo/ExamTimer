@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { BackIcon } from "@/components/Icons/BackIcon";
 import { DownArrorIcon } from "@/components/Icons/DownArrowIcon";
@@ -6,12 +7,15 @@ import { ModalPortal } from "@/components/common/ModalPortal";
 import { PopupModal } from "@/components/common/PopupModal";
 
 import { ModalType } from "@/constants";
+import { calculateTimeDifference } from "@/utils";
+import { DBExamInfoType } from "@/types";
 
 import { useSetTimeContext } from "@/hooks/useSetTimeContext";
 import { useModalContext } from "@/hooks/useModalContext";
-import { calculateTimeDifference } from "@/utils";
+import { usePostRequest } from "@/hooks/usePostRequest";
 
 export function CreateExam() {
+  const navigate = useNavigate();
   const [hasWarning, setHasWarning] = useState("");
   const [examName, setExamName] = useState("");
 
@@ -21,6 +25,8 @@ export function CreateExam() {
   const { handleOpen, handleClose } = useModalContext();
   const { handleChangeTimeState, startTime, endTime, handleSetTimeMode } =
     useSetTimeContext();
+
+  const { postProcessData } = usePostRequest<DBExamInfoType>();
 
   /**
    * 시간 종류 버튼 클릭 시
@@ -33,10 +39,24 @@ export function CreateExam() {
   };
 
   /**
-   * 시간 설정 모달창 확인 버튼 클릭 시
+   * 모달 확인 버튼 이벤트
+   * @param modalType 모달 타입
    */
-  const handleSetTimerConfirm = () => {
-    handleChangeTimeState();
+  const handleModalConfirm = (modalType: ModalType) => {
+    switch (modalType) {
+      case ModalType.SET_TIME:
+        handleChangeTimeState();
+        break;
+      case ModalType.CHECK_INPUT_INFO:
+        const createdExam = {
+          examName,
+          startTime,
+          endTime,
+        };
+        postProcessData({ method: "CREATE", data: createdExam });
+        navigate("/");
+        break;
+    }
     handleClose();
   };
 
@@ -141,7 +161,7 @@ export function CreateExam() {
       <ModalPortal>
         <PopupModal
           type={modalType.current!}
-          onClick={handleSetTimerConfirm}
+          onClick={() => handleModalConfirm(modalType.current!)}
           inputExamName={examName}
         />
       </ModalPortal>

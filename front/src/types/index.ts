@@ -2,7 +2,8 @@ import { RECOMMEND_EXAM_TIME } from "@/constants";
 
 export interface ExamInfoType {
     title: string;
-    time: string;
+    startTime: string;
+    endTime: string;
 }
 
 export interface RecommendExamInfoType {
@@ -11,3 +12,14 @@ export interface RecommendExamInfoType {
 }
 
 export type RecommendExamNameType = keyof typeof RECOMMEND_EXAM_TIME;
+
+export interface DBExamInfoType {
+    id?: number;
+    examName: string;
+    startTime: string;
+    endTime: string;
+}
+
+export interface StartExamContentType {
+    examInfo: DBExamInfoType
+}

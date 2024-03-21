@@ -28,7 +28,8 @@ export function ExamModal({ examName }: Props) {
           <ModalExamButton
             key={exam.title}
             title={exam.title}
-            time={exam.time}
+            startTime={exam.startTime}
+            endTime={exam.endTime}
             isSelected={exam.title === selectedExam?.title}
             onClick={() => {
               handleExamButtonClick(exam);

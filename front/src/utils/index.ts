@@ -1,14 +1,11 @@
-import { NOON } from "@/constants";
-
 /**
  * 시, 분, AM|PM 을 입력받아서 시간 형식 문자열로 리턴
  * @param hour 시
  * @param minute 분
- * @param noon AM: 0 | PM: 1 
  * @returns 시간 형식 문자열
  */
-export function convertToTimeFormat (hour: number, minute: number, noon: number) {
-    return `${(hour + 1).toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")} ${NOON[noon]}`
+export function convertToTimeFormat (hour: number, minute: number) {
+    return `${hour.toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")}`
 }
 
 /**
