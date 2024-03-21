@@ -59,6 +59,7 @@ export function Exam() {
         // TODO: 시험 생성 처리 로직 설계
         break;
       case ModalType.DELETE_EXAM:
+        setIsEdit(false);
         handleDelete(examIdRef.current);
         postProcessData({ method: "DELETE", id: examIdRef.current });
         break;
@@ -98,27 +99,35 @@ export function Exam() {
         <section className="py-2">
           <SectionTitle
             title="나의 시험"
-            hasButton
+            hasButton={examData?.length !== 0}
             onClick={handleEditButtonClick}
           />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-            {isEdit && <ExamPlusButton />}
-            {examData !== undefined &&
-              examData.map((exam, idx) => (
-                <TestButton
-                  key={idx}
-                  startTime={exam.startTime}
-                  endTime={exam.endTime}
-                  title={exam.examName}
-                  onExamBtnClick={() => handleExamStartButtonClick(exam)}
-                  onDeleteBtnClick={(event) =>
-                    handleExamDeleteButtonClick(event, exam.id)
-                  }
-                  isEdit={isEdit}
-                />
-              ))}
-          </div>
+          {examData?.length === 0 ? (
+            <div className="w-full h-full flex items-center justify-center">
+              <span className="text-text dark:text-text-dark text-lg font-semibold">
+                나의 시험이 없습니다
+              </span>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+              {examData !== undefined &&
+                examData.map((exam, idx) => (
+                  <TestButton
+                    key={idx}
+                    startTime={exam.startTime}
+                    endTime={exam.endTime}
+                    title={exam.examName}
+                    onExamBtnClick={() => handleExamStartButtonClick(exam)}
+                    onDeleteBtnClick={(event) =>
+                      handleExamDeleteButtonClick(event, exam.id!)
+                    }
+                    isEdit={isEdit}
+                  />
+                ))}
+            </div>
+          )}
         </section>
+        <ExamPlusButton />
       </div>
       <ModalPortal>
         <PopupModal

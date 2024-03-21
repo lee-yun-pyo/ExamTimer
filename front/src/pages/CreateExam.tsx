@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { BackIcon } from "@/components/Icons/BackIcon";
 import { DownArrorIcon } from "@/components/Icons/DownArrowIcon";
@@ -14,6 +15,7 @@ import { useModalContext } from "@/hooks/useModalContext";
 import { usePostRequest } from "@/hooks/usePostRequest";
 
 export function CreateExam() {
+  const navigate = useNavigate();
   const [hasWarning, setHasWarning] = useState("");
   const [examName, setExamName] = useState("");
 
@@ -52,6 +54,7 @@ export function CreateExam() {
           endTime,
         };
         postProcessData({ method: "CREATE", data: createdExam });
+        navigate("/");
         break;
     }
     handleClose();
