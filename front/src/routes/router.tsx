@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import { Exam } from "@/pages/Exam";
 import { CreateExam } from "@/pages/CreateExam";
+import { ExamTimer } from "@/pages/ExamTimer";
 
 import { Layout } from "@/components/common/Layout";
 import { Title } from "@/components/common/Title";
@@ -33,5 +34,9 @@ export const router = createBrowserRouter([
         <CreateExam />
       </SetTimeProvider>
     ),
+  },
+  {
+    path: "timer",
+    element: <ExamTimer />,
   },
 ]);

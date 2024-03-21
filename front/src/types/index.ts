@@ -1,18 +1,5 @@
 import { RECOMMEND_EXAM_TIME } from "@/constants";
 
-export interface ExamInfoType {
-    title: string;
-    startTime: string;
-    endTime: string;
-}
-
-export interface RecommendExamInfoType {
-    토익: ExamInfoType[];
-    수능: ExamInfoType[];
-}
-
-export type RecommendExamNameType = keyof typeof RECOMMEND_EXAM_TIME;
-
 export interface DBExamInfoType {
     id?: number;
     examName: string;
@@ -23,3 +10,10 @@ export interface DBExamInfoType {
 export interface StartExamContentType {
     examInfo: DBExamInfoType
 }
+
+export interface RecommendExamInfoType {
+    토익: DBExamInfoType[];
+    수능: DBExamInfoType[];
+}
+
+export type RecommendExamNameType = keyof typeof RECOMMEND_EXAM_TIME;

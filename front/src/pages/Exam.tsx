@@ -1,4 +1,5 @@
 import { MouseEvent, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { SectionTitle } from "@/components/Home/SectionTitle";
 import { TestButton } from "@/components/Home/TestButton";
@@ -18,7 +19,8 @@ export function Exam() {
   const modalType = useRef<ModalType | null>();
   const examIdRef = useRef<number>(0);
   const [isEdit, setIsEdit] = useState(false);
-  const [exam, setExam] = useState<RecommendExamNameType | null>();
+  const [recommendExam, setRecommendExam] =
+    useState<RecommendExamNameType | null>();
   const [selectedExam, setSelectedExam] = useState<DBExamInfoType | null>(null);
 
   const { result: examData, handleDelete } = useExamDataStore<DBExamInfoType[]>(
@@ -29,13 +31,19 @@ export function Exam() {
   const { postProcessData } = usePostRequest<DBExamInfoType>();
   const { handleOpen, handleClose } = useModalContext();
 
+  const navigate = useNavigate();
+
+  const handleSetSelectedExam = (exam: DBExamInfoType) => {
+    setSelectedExam(exam);
+  };
+
   const handleRecommendExamClick = (examName: RecommendExamNameType) => {
-    setExam(examName);
+    setRecommendExam(examName);
     showModalByModalType(ModalType.SELECT_EXAM);
   };
 
   const handleExamStartButtonClick = (selectedExam: DBExamInfoType) => {
-    setSelectedExam(selectedExam);
+    handleSetSelectedExam(selectedExam);
     showModalByModalType(ModalType.START_EXAM);
   };
 
@@ -55,20 +63,16 @@ export function Exam() {
 
   const handleStartButtonClick = (modalType: ModalType) => {
     switch (modalType) {
-      case ModalType.CREATE_EXAM:
-        // TODO: 시험 생성 처리 로직 설계
-        break;
       case ModalType.DELETE_EXAM:
         setIsEdit(false);
         handleDelete(examIdRef.current);
         postProcessData({ method: "DELETE", id: examIdRef.current });
         break;
       case ModalType.SELECT_EXAM:
-        // TODO: 시험 선택 처리 로직 설계
+        navigate("/timer", { state: selectedExam });
         break;
       case ModalType.START_EXAM:
-        // TODO: 시험 시작 처리 로직 설계
-        // data 를 가지고 navigate하고 타이머 페이지에서 data가져오기
+        navigate("/timer", { state: selectedExam });
         break;
     }
     handleClose();
@@ -134,7 +138,8 @@ export function Exam() {
           type={modalType.current!}
           onClick={() => handleStartButtonClick(modalType.current!)}
           selectedExam={selectedExam!}
-          examName={exam!}
+          examName={recommendExam!}
+          onSelectExam={handleSetSelectedExam}
         />
       </ModalPortal>
     </main>

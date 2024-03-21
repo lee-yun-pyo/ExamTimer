@@ -1,20 +1,26 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import { ModalExamButton } from "@/components/Home/Modal/ModalExamButton";
 
-import { ExamInfoType, RecommendExamNameType } from "@/types";
+import { DBExamInfoType, RecommendExamNameType } from "@/types";
 import { RECOMMEND_EXAM_TIME } from "@/constants";
 
 interface Props {
   examName: RecommendExamNameType;
+  onSelectExam: (exam: DBExamInfoType) => void;
 }
 
-export function ExamModal({ examName }: Props) {
-  const [selectedExam, setSelectedExam] = useState<ExamInfoType | null>(null);
+export function ExamModal({ examName, onSelectExam }: Props) {
+  const [selectIndex, setSelectIndex] = useState(0);
 
-  const handleExamButtonClick = (exam: ExamInfoType) => {
-    setSelectedExam(exam);
+  const handleExamButtonClick = (exam: DBExamInfoType, index: number) => {
+    setSelectIndex(index);
+    onSelectExam(exam);
   };
+
+  useEffect(() => {
+    onSelectExam(RECOMMEND_EXAM_TIME[examName][selectIndex]);
+  }, []);
 
   return (
     <Fragment>
@@ -24,15 +30,15 @@ export function ExamModal({ examName }: Props) {
         </span>
       </div>
       <div className="flex flex-col gap-3 w-full h-[250px] overflow-scroll">
-        {RECOMMEND_EXAM_TIME[examName].map((exam) => (
+        {RECOMMEND_EXAM_TIME[examName].map((exam, index) => (
           <ModalExamButton
-            key={exam.title}
-            title={exam.title}
+            key={exam.examName}
+            title={exam.examName}
             startTime={exam.startTime}
             endTime={exam.endTime}
-            isSelected={exam.title === selectedExam?.title}
+            isSelected={index === selectIndex}
             onClick={() => {
-              handleExamButtonClick(exam);
+              handleExamButtonClick(exam, index);
             }}
           />
         ))}

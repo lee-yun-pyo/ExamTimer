@@ -18,6 +18,7 @@ interface Props {
   inputExamName?: string;
   selectedExam?: DBExamInfoType;
   onClick: () => void;
+  onSelectExam?: (exam: DBExamInfoType) => void;
 }
 
 export function PopupModal({
@@ -26,6 +27,7 @@ export function PopupModal({
   selectedExam,
   inputExamName,
   onClick,
+  onSelectExam,
 }: Props) {
   const { handleClose } = useModalContext();
 
@@ -44,7 +46,9 @@ export function PopupModal({
       case ModalType.SELECT_EXAM:
         return {
           text: "시작하기",
-          content: <ExamModal examName={examName!} />,
+          content: (
+            <ExamModal examName={examName!} onSelectExam={onSelectExam!} />
+          ),
         };
       case ModalType.DELETE_EXAM:
         return {

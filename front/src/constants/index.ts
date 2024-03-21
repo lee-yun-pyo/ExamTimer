@@ -20,17 +20,17 @@ export const NAVIGATION_ITEMS = {
 
 export const RECOMMEND_EXAM_TIME: RecommendExamInfoType = {
     토익: [
-        {title: "오전", startTime: "10:10", endTime: "12:10" },
-        {title: "오후", startTime: "15:15", endTime: "17:10" },
-        {title: "RC (오전)", startTime: "10:55", endTime: "12:10" },
-        {title: "RC (오후)", startTime: "15:55", endTime: "17:10" },
+        {examName: "오전", startTime: "10:10", endTime: "12:10" },
+        {examName: "오후", startTime: "15:15", endTime: "17:10" },
+        {examName: "RC (오전)", startTime: "10:55", endTime: "12:10" },
+        {examName: "RC (오후)", startTime: "15:55", endTime: "17:10" },
     ],
     수능: [
-        {title: "국어", startTime: "08:40", endTime: "10:00" },
-        {title: "수학", startTime: "10:30", endTime: "12:10" },
-        {title: "영어", startTime: "13:10", endTime: "14:20" },
-        {title: "탐구1", startTime: "15:35", endTime: "16:05" },
-        {title: "탐구2", startTime: "16:07", endTime: "16:37" },
+        {examName: "국어", startTime: "08:40", endTime: "10:00" },
+        {examName: "수학", startTime: "10:30", endTime: "12:10" },
+        {examName: "영어", startTime: "13:10", endTime: "14:20" },
+        {examName: "탐구1", startTime: "15:35", endTime: "16:05" },
+        {examName: "탐구2", startTime: "16:07", endTime: "16:37" },
     ] 
 } as const;
 
