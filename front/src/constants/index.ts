@@ -58,3 +58,5 @@ export enum TimeUnitType {
 }
 
 export const DB_NAME = "example";
+
+export const CLOCK_NUMS = Array.from({ length: 12 }, (_, idx) => idx + 1);
